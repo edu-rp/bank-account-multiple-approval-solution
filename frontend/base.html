@@ -22,9 +22,37 @@
 
     <div>
       <h3>Deposit</h3>
-      <input type="text" id="account" />
+      <input type="text" id="depositAccount" />
       <input type="text" id="depositAmount" />
       <button onclick="deposit()">Deposit</button>
+    </div>
+
+    <div>
+      <h3>Request Withdrawal</h3>
+      <input type="text" id="withdrawalRequestAccount" />
+      <input type="text" id="withdrawalRequestAmount" />
+      <button onclick="withdrawalRequest()">Request</button>
+    </div>
+
+    <div>
+      <h3>Approve Withdrawal</h3>
+      <input type="text" id="withdrawalAccount" />
+      <input type="text" id="withdrawalRequest" />
+      <button onclick="approveWithdrawal()">Approve</button>
+    </div>
+
+    <div>
+      <h3>Withdraw</h3>
+      <input type="text" id="withdrawAccount" />
+      <input type="text" id="withdrawRequest" />
+      <button onclick="withdraw()">Withdraw</button>
+    </div>
+
+    <div>
+      <h3>View Account Owners</h3>
+      <input type="text" id="viewOwnersAccount" />
+      <p id="listOwners"></p>
+      <button onclick="viewOwners()">View</button>
     </div>
     
     <div id="events"></div>

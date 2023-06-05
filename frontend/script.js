@@ -26,7 +26,7 @@ async function createAccount() {
     .filter((n) => n);
   console.log(owners);
 
-  await contract.createAccount(owners).then(() => alert("Success"));
+  await contract.createAccount(owners).then(() => alert("Success")).catch(errorHandler);
 }
 
 async function viewAccounts() {
@@ -39,7 +39,7 @@ async function viewAccounts() {
 async function deposit() {
   await getAccess();
   const account = document
-    .getElementById("account")
+    .getElementById("depositAccount")
     .value.split(",")
     .filter((n) => n)[0];
     
@@ -50,9 +50,78 @@ async function deposit() {
   console.log(account);
   console.log(amount);
 
-  await contract.deposit(account, {value: amount * 100000000000}).then(() => alert("Success"));
+  await contract.deposit(account, {value: amount}).then(() => alert("Success")).catch(errorHandler);
 }
 
+async function withdrawalRequest() {
+  await getAccess();
+  const account = document
+    .getElementById("withdrawalRequestAccount")
+    .value.split(",")
+    .filter((n) => n)[0];
+    
+  const amount = document
+    .getElementById("withdrawalRequestAmount")
+    .value.split(",")
+    .filter((n) => n)[0];
+  console.log(account);
+  console.log(amount);
+
+  await contract.requestWithdrawl(account, amount).then(() => alert("Request submitted")).catch(errorHandler);
+}
+
+async function approveWithdrawal() {
+  await getAccess();
+  const account = document
+    .getElementById("withdrawalAccount")
+    .value.split(",")
+    .filter((n) => n)[0];
+    
+  const amount = document
+    .getElementById("withdrawalRequest")
+    .value.split(",")
+    .filter((n) => n)[0];
+  console.log(account);
+  console.log(amount);
+
+  await contract.approveWithdrawl(account, amount)
+  .then(() => alert("Approval submitted")).catch(errorHandler);
+}
+
+async function viewOwners() {
+  await getAccess();
+  const account = document
+    .getElementById("viewOwnersAccount")
+    .value.split(",")
+    .filter((n) => n)[0];
+  console.log(account);
+
+  const owners = await contract.getOwners(account);
+  document.getElementById("listOwners").innerHTML = owners;
+}
+
+async function withdraw() {
+  await getAccess();
+  const account = document
+    .getElementById("withdrawAccount")
+    .value.split(",")
+    .filter((n) => n)[0];
+    
+  const request = document
+    .getElementById("withdrawRequest")
+    .value.split(",")
+    .filter((n) => n)[0];
+  console.log(account);
+  console.log(request);
+
+  const result = await contract.withdraw(account, request).catch(errorHandler);
+  console.log(result);
+}
+
+function errorHandler(error) {
+  alert(error.data.message);
+  console.error(error);
+}
 
 async function getAccess() {
   if (contract) return;
