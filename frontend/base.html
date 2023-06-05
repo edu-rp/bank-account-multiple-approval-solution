@@ -7,16 +7,26 @@
     <title>Bank Account Test</title>
   </head>
   <body>
+
     <div>
       <h3>Create Account</h3>
       <input type="text" id="owners" />
       <button onclick="createAccount()">Create</button>
     </div>
+
     <div>
       <h3>View Accounts</h3>
       <p id="accounts"></p>
       <button onclick="viewAccounts()">View</button>
     </div>
+
+    <div>
+      <h3>Deposit</h3>
+      <input type="text" id="account" />
+      <input type="text" id="depositAmount" />
+      <button onclick="deposit()">Deposit</button>
+    </div>
+    
     <div id="events"></div>
     <script
       src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"

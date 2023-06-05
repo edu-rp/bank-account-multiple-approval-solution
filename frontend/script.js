@@ -12,7 +12,7 @@ const abi = [
   "function getBalance(uint256 accountId) view returns (uint256)",
   "function getOwners(uint256 accountId) view returns (address[])",
   "function requestWithdrawl(uint256 accountId, uint256 amount)",
-  "function withdraw(uint256 accountId, uint256 withdrawId)",
+  "function withdraw(uint256 accountId, uint256 withdrawId)"
 ];
 
 const address = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
@@ -35,6 +35,24 @@ async function viewAccounts() {
   console.log(result);
   document.getElementById("accounts").innerHTML = result;
 }
+
+async function deposit() {
+  await getAccess();
+  const account = document
+    .getElementById("account")
+    .value.split(",")
+    .filter((n) => n)[0];
+    
+  const amount = document
+    .getElementById("depositAmount")
+    .value.split(",")
+    .filter((n) => n)[0];
+  console.log(account);
+  console.log(amount);
+
+  await contract.deposit(account, {value: amount * 100000000000}).then(() => alert("Success"));
+}
+
 
 async function getAccess() {
   if (contract) return;
