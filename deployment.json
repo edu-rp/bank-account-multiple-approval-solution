@@ -14,6 +14,7 @@
       "function getApprovals(uint256 accountId, uint256 withdrawId) view returns (uint256)",
       "function getBalance(uint256 accountId) view returns (uint256)",
       "function getOwners(uint256 accountId) view returns (address[])",
+      "function paySomeone(address someone) payable",
       "function requestWithdrawl(uint256 accountId, uint256 amount)",
       "function withdraw(uint256 accountId, uint256 withdrawId)"
     ]

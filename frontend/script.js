@@ -11,6 +11,7 @@ const abi = [
   "function getApprovals(uint256 accountId, uint256 withdrawId) view returns (uint256)",
   "function getBalance(uint256 accountId) view returns (uint256)",
   "function getOwners(uint256 accountId) view returns (address[])",
+  "function paySomeone(address someone) payable",
   "function requestWithdrawl(uint256 accountId, uint256 amount)",
   "function withdraw(uint256 accountId, uint256 withdrawId)"
 ];
@@ -115,6 +116,24 @@ async function withdraw() {
   console.log(request);
 
   const result = await contract.withdraw(account, request).catch(errorHandler);
+  console.log(result);
+}
+
+async function pay() {
+  await getAccess();
+  const someone = document
+    .getElementById("someone")
+    .value.split(",")
+    .filter((n) => n)[0];
+    
+  const amount = document
+    .getElementById("payAmount")
+    .value.split(",")
+    .filter((n) => n)[0];
+  console.log(someone);
+  console.log(amount);
+
+  const result = await contract.paySomeone(someone, {value: amount}).catch(errorHandler);
   console.log(result);
 }
 

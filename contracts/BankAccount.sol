@@ -192,6 +192,11 @@ contract BankAccount {
         emit Withdraw(withdrawId, block.timestamp);
     }
 
+    function paySomeone(address someone) external payable {
+        (bool sent, ) = payable(someone).call{value: msg.value}("");
+        require(sent);
+    }
+
     function getBalance(uint256 accountId) public view returns (uint256) {
         return accounts[accountId].balance;
     }
